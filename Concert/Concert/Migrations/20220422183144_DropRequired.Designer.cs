@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Concert.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220422033316_Entities")]
-    partial class Entities
+    [Migration("20220422183144_DropRequired")]
+    partial class DropRequired
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,7 +50,10 @@ namespace Concert.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("Date")
+                    b.Property<int>("Codigo")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Document")
@@ -72,10 +75,10 @@ namespace Concert.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EntraceId");
-
-                    b.HasIndex("Name")
+                    b.HasIndex("Codigo")
                         .IsUnique();
+
+                    b.HasIndex("EntraceId");
 
                     b.ToTable("Tickets");
                 });

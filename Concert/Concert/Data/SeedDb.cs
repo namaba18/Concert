@@ -21,54 +21,54 @@ namespace Concert.Data
         {
             if (! _context.Tickets.Any())
             {
-                for (int i = 0; i < 1250; i++)
+                for (int i = 1; i <= 1250; i++)
                 {
                     _context.Tickets.Add(new Ticket
                     {
-                        Id = i,
+                        Codigo = i,
                         WasUsed = false,
                         Document = "",
                         Name = "",
-                        Date = DateTime.Today,
+                        Date = null,
                         Entrace = new Entrace { Description = "Norte" }
 
                     });
                 }
-                for (int i = 1250; i < 2500; i++)
+                for (int i = 1251; i <= 2500; i++)
                 {
                     _context.Tickets.Add(new Ticket
                     { 
-                        Id=i,
+                        Codigo=i,
                         WasUsed = false,
                         Document = "",
                         Name = "",
-                        Date = DateTime.Today,
+                        Date = null,
                         Entrace = new Entrace { Description = "Sur" }
 
                     });
                 }
-                for (int i = 2500; i < 3750; i++)
+                for (int i = 2501; i <= 3750; i++)
                 {
                     _context.Tickets.Add(new Ticket
                     {
-                        Id = i,
+                        Codigo = i,
                         WasUsed = false,
                         Document = "",
                         Name = "",
-                        Date = DateTime.Today,
+                        Date = null,
                         Entrace = new Entrace { Description = "Oriente" }
 
                     });
                 }
-                for (int i = 3750; i < 5000; i++)
+                for (int i = 3751; i <= 5000; i++)
                 {
                     _context.Tickets.Add(new Ticket
                     {
-                        Id = i,
+                        Codigo = i,
                         WasUsed = false,
                         Document = "",
                         Name = "",
-                        Date = DateTime.Today,
+                        Date = null,
                         Entrace = new Entrace { Description = "Occidente" }
 
                     });

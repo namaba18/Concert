@@ -4,8 +4,13 @@ namespace Concert.Data.Entities
 {
     public class Ticket
     {
-        [Display(Name ="Código")]
+        
         public int Id { get; set; }
+        
+        [Display(Name = "Código")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        public int Codigo { get; set; }
+
         [Display(Name = "Usado")]
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener máximo {1} caractéres.")]
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
@@ -22,9 +27,7 @@ namespace Concert.Data.Entities
         public String Name { get; set; }
 
         [Display(Name = "Fecha")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public Entrace Entrace { get; set; }
     }

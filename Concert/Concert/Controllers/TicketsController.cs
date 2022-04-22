@@ -15,22 +15,20 @@ namespace Concert.Controllers
             _context = context;
         }
 
-        // GET: Tickets
         public async Task<IActionResult> Index()
         {
             return View();
         }
 
-        // GET: Tickets/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? codigo)
         {
-            if (id == null)
+            if (codigo == null)
             {
                 return NotFound();
             }
 
-            var ticket = await _context.Tickets
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Ticket ticket = await _context.Tickets
+                .FirstOrDefaultAsync(m => m.Codigo == codigo);
             if (ticket == null)
             {
                 return NotFound();
@@ -39,15 +37,11 @@ namespace Concert.Controllers
             return View(ticket);
         }
 
-        // GET: Tickets/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Tickets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,WasUsed,Document,Name,Date")] Ticket ticket)
@@ -61,15 +55,14 @@ namespace Concert.Controllers
             return View(ticket);
         }
 
-        // GET: Tickets/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? codigo)
         {
-            if (id == null)
+            if (codigo == null)
             {
                 return NotFound();
             }
 
-            var ticket = await _context.Tickets.FindAsync(id);
+            var ticket = await _context.Tickets.FindAsync(codigo);
             if (ticket == null)
             {
                 return NotFound();
@@ -82,9 +75,9 @@ namespace Concert.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,WasUsed,Document,Name,Date")] Ticket ticket)
+        public async Task<IActionResult> Edit(int codigo, [Bind("Id,WasUsed,Document,Name,Date")] Ticket ticket)
         {
-            if (id != ticket.Id)
+            if (codigo != ticket.Codigo)
             {
                 return NotFound();
             }
@@ -98,7 +91,7 @@ namespace Concert.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TicketExists(ticket.Id))
+                    if (!TicketExists(ticket.Codigo))
                     {
                         return NotFound();
                     }

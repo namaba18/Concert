@@ -28,6 +28,7 @@ namespace Concert.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Codigo = table.Column<int>(type: "int", nullable: false),
                     WasUsed = table.Column<bool>(type: "bit", maxLength: 50, nullable: false),
                     Document = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -46,15 +47,15 @@ namespace Concert.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tickets_Codigo",
+                table: "Tickets",
+                column: "Codigo",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tickets_EntraceId",
                 table: "Tickets",
                 column: "EntraceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tickets_Name",
-                table: "Tickets",
-                column: "Name",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

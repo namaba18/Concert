@@ -26,6 +26,6 @@ namespace Concert.Models
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public DateTime Date { get; set; }
 
-        public String Entrace { get; set; }
+        public int EntraceId { get; set; }
     }
 }

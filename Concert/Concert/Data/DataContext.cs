@@ -14,7 +14,7 @@ namespace Concert.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Ticket>().HasIndex(c => c.Name).IsUnique();
+            modelBuilder.Entity<Ticket>().HasIndex(c => c.Codigo).IsUnique();
         }
     }
 }
