@@ -28,12 +28,11 @@ namespace Concert.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Codigo = table.Column<int>(type: "int", nullable: false),
-                    WasUsed = table.Column<bool>(type: "bit", maxLength: 50, nullable: false),
-                    Document = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EntraceId = table.Column<int>(type: "int", nullable: false)
+                    WasUsed = table.Column<bool>(type: "bit", nullable: false),
+                    Document = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EntraceId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,15 +41,8 @@ namespace Concert.Migrations
                         name: "FK_Tickets_Entraces_EntraceId",
                         column: x => x.EntraceId,
                         principalTable: "Entraces",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tickets_Codigo",
-                table: "Tickets",
-                column: "Codigo",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_EntraceId",

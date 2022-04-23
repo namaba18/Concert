@@ -12,17 +12,17 @@ namespace Concert.Helpers
         {
             _context = context;
         }
-        public async Task<IEnumerable<SelectListItem>> GetComboTicketsAsync()
+        public async Task<IEnumerable<SelectListItem>> GetComboEntraceAsync()
         {
-            List<SelectListItem> list = await _context.Tickets.Select(c => new SelectListItem
+            List<SelectListItem> list = await _context.Entraces.Select(c => new SelectListItem
             {
-                Text = c.Name,
+                Text = c.Description,
                 Value = c.Id.ToString()
             })
                 .OrderBy(c => c.Text)
                 .ToListAsync();
 
-            list.Insert(0, new SelectListItem { Text = "[Seleccione una categoría...", Value = "0" });
+            list.Insert(0, new SelectListItem { Text = "[Seleccione uno...", Value = "0" });
             return list;
         }
     }

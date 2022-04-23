@@ -11,10 +11,6 @@ namespace Concert.Data
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Entrace> Entraces { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Ticket>().HasIndex(c => c.Codigo).IsUnique();
-        }
+       
     }
 }

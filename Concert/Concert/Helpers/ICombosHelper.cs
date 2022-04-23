@@ -4,7 +4,7 @@ namespace Concert.Helpers
 {
     public interface ICombosHelper
     {
-        Task<IEnumerable<SelectListItem>> GetComboTicketsAsync();
+        Task<IEnumerable<SelectListItem>> GetComboEntraceAsync();
 
     }
 }
