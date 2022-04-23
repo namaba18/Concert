@@ -30,23 +30,21 @@ namespace Concert.Controllers
         {         
                       
             if (ModelState.IsValid)
-            {
-                Ticket ticket = await _context.Tickets.FindAsync(id);
-                if (ticket != null)
-                {
-                    try 
-                    {
-                        return RedirectToAction(nameof(Edit), new { Id = id }); ;
-                    }
-                    catch (Exception exception)
-                    {
-                        ModelState.AddModelError(string.Empty, exception.Message);
-                    }
-                    
-                }
+            {                                               
                 try
                 {
-                    return RedirectToAction(nameof(Edit), new { Id = id }); 
+                    Ticket ticket = await _context.Tickets.FindAsync(id);
+                    if (ticket == null)
+                    {
+                        try
+                        { 
+                        }
+                        catch (Exception exception)
+                        {
+                            ModelState.AddModelError(string.Empty, "La boleta no existe");
+                        }
+                
+                    }
 
                 }
                 catch (DbUpdateException dbUpdateException)
@@ -65,10 +63,11 @@ namespace Concert.Controllers
                     ModelState.AddModelError(string.Empty, exception.Message);
                 }
                
+               
             }
                                   
             
-            return RedirectToAction(nameof(Edit), new { Id = id }); ;
+            return RedirectToAction(nameof(Edit), new { Id = id }) ;
         }
 
         public async Task<IActionResult> Index()
@@ -123,8 +122,8 @@ namespace Concert.Controllers
             {
                 return NotFound();
             }
-
             
+                        
             if (ModelState.IsValid)
             {
                 try
@@ -133,6 +132,10 @@ namespace Concert.Controllers
                     {
                         Id=model.Id,
                         WasUsed = true,
+                        Date = DateTime.Now,
+                        Document = model.Document,
+                        Name = model.Name,
+                        Entrace = await _context.Entraces.FirstOrDefaultAsync(m => m.Id == model.EntraceId)
                     };
                     
                     _context.Update(ticket);
@@ -158,9 +161,6 @@ namespace Concert.Controllers
             return View(model);
         }
 
-        private bool TicketExists(int id)
-        {
-            return _context.Tickets.Any(e => e.Id == id);
-        }
+      
     }
 }
